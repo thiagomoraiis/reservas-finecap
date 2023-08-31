@@ -23,6 +23,7 @@ class ReservaDetailView(DetailView):
     queryset = Reserva.objects.all()
     context_object_name = 'reserva'
     pk_url_kwarg = 'id'
+    template_name = 'reservas/pages/reserva.html'
 
 
 class ReservaDeleteView(DeleteView):

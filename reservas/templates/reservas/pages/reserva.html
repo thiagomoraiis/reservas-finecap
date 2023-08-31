@@ -1,0 +1,33 @@
+{% extends 'reservas/pages/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+<div class="container">
+    <h1>Reserva</h1>
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                  Informações
+                </div>
+                <div class="card-body">
+                    <h3>Stand</h3>
+                  <p>{{ reserva.stand }}</p>
+
+                  <h3>Nome da empresa</h3>
+                  <p>{{ reserva.nome_empresa }}</p>
+
+                  <h3>Categoria</h3>
+                  <p>{{ reserva.categoria_empresa }}</p>
+
+                  <h3>CNPJ</h3>
+                  <p>{{ reserva.cnpj }}</p>
+
+                  <h3>Quitado</h3>
+                  <p >{% if i.quitado == True %} Quitado {% else %} Não Quitado {% endif %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
