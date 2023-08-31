@@ -1,4 +1,12 @@
-from django.views.generic import ListView, CreateView, DetailView, DeleteView
+from django.views.generic import (
+    ListView,
+    CreateView,
+    DetailView,
+    DeleteView,
+    UpdateView
+)
+
+
 from .models import Reserva
 from .forms import ReservaModelForm
 from django.urls import reverse_lazy
@@ -24,6 +32,14 @@ class ReservaDetailView(DetailView):
     context_object_name = 'reserva'
     pk_url_kwarg = 'id'
     template_name = 'reservas/pages/reserva.html'
+
+
+class ReservaUpdateView(UpdateView):
+    model = Reserva
+    form_class = ReservaModelForm
+    pk_url_kwarg = 'id'
+    template_name = 'reservas/pages/reserva_form.html'
+    success_url = reverse_lazy('index')
 
 
 class ReservaDeleteView(DeleteView):

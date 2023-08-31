@@ -3,7 +3,8 @@ from .views import (
     IndexListView,
     ReservaCreateView,
     ReservaDetailView,
-    ReservaDeleteView
+    ReservaDeleteView,
+    ReservaUpdateView
     )
 
 urlpatterns = [
@@ -18,5 +19,8 @@ urlpatterns = [
     ),
     path(
         'delete/<int:id>/', ReservaDeleteView.as_view(), name='delete-reserva'
+    ),
+    path(
+        'update/<int:id>/', ReservaUpdateView.as_view(), name='update-reserva'
     ),
 ]
