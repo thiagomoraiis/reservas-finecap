@@ -3,28 +3,28 @@
 {% load bootstrap5 %}
 {% block content %}
 <div class="container">
-    <h1>Reserva</h1>
+    <h1 class="text-secondary">Reserva</h1>
     <div class="row">
         <div class="col">
             <div class="card" style="width: 18rem;">
-                <div class="card-header">
+                <div class="card-header text-secondary">
                   Informações
                 </div>
                 <div class="card-body">
-                    <h3>Stand</h3>
-                  <p>{{ reserva.stand }}</p>
+                <h3 class="text-secondary" >Stand</h3>
+                  <p class="text-secondary">{{ reserva.stand }}</p>
 
-                  <h3>Nome da empresa</h3>
-                  <p>{{ reserva.nome_empresa }}</p>
+                  <h3 class="text-secondary">Nome da empresa</h3>
+                  <p class="text-secondary">{{ reserva.nome_empresa }}</p>
 
-                  <h3>Categoria</h3>
-                  <p>{{ reserva.categoria_empresa }}</p>
+                  <h3 class="text-secondary">Categoria</h3>
+                  <p class="text-secondary">{{ reserva.categoria_empresa }}</p>
 
-                  <h3>CNPJ</h3>
-                  <p>{{ reserva.cnpj }}</p>
+                  <h3 class="text-secondary">CNPJ</h3>
+                  <p class="text-secondary">{{ reserva.cnpj }}</p>
 
-                  <h3>Quitado</h3>
-                  <p >{% if i.quitado == True %} Quitado {% else %} Não Quitado {% endif %}</p>
+                  <h3 class="text-secondary">Quitado</h3>
+                  <p class="{% if reserva.quitado == True %} text-success {% else %} text-danger {% endif %}">{% if reserva.quitado == True %} Quitado {% else %} Não Quitado {% endif %}</p>
                 </div>
             </div>
         </div>
