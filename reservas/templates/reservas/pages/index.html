@@ -10,8 +10,6 @@
               <tr>
                 <th>Stand</th>
                 <th>Nome</th>
-                <th>Categoria Empresa</th>
-                <th>CNPJ</th>
                 <th>Quitado</th>
                 <th>Actions</th>
               </tr>
@@ -25,10 +23,6 @@
                 <td>
                   {{ i.nome_empresa }}
                 </td>
-                <td>
-                  {{ i.categoria_empresa }}
-                </td>
-                <td>{{ i.cnpj }}</td>
                 <td>{% if i.quitado == True %} Quitado {% else %} Não Quitado {% endif %}</td>
                 <td>
                   <a href="{% url 'detail-reserva' i.id %}" class="text-primary">
