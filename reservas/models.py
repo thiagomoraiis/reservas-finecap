@@ -24,6 +24,7 @@ class Reserva(models.Model):
     )
     cnpj = models.CharField(max_length=18)
     quitado = models.BooleanField(default=False)
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.nome_empresa
