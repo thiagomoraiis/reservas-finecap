@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.views.generic import (
     ListView,
     CreateView,
@@ -18,19 +20,27 @@ class IndexListView(ListView):
     queryset = Reserva.objects.all().order_by('date')
     context_object_name = 'reservas'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.request == 'GET':
-            searched_name = self.request.GET['search-name']
-            searched_value = self.request.GET['search-value']
-            searched_payed = self.request.GET['search-payed']
-            searched_date = self.request.GET['search-date']
-            reservas = Reserva.objects.filter(nome_empresa__contains=searched_name, stand__valor=searched_value, quitado=searched_payed, date=searched_date)
-            context['reservas'] = reservas
-            return context
-        else:
-            pass
-        return context
+    def get_queryset(self):
+        qs = super().get_queryset()
+
+        searched_name = self.request.GET.get('search-name')
+        searched_value = self.request.GET.get('search-value')
+        searched_payed = self.request.GET.get('search-payed')
+        searched_date = self.request.GET.get('search-date')
+
+        if searched_name:
+            qs = qs.filter(nome_empresa__icontains=searched_name)
+
+        elif searched_value:
+            qs = qs.filter(stand__valor=searched_value)
+
+        elif searched_payed is not None:
+            qs = qs.filter(quitado=bool(str(searched_payed)))
+
+        elif searched_date:
+            qs = qs.filter(date__gte=searched_date)
+
+        return qs
 
 
 class ReservaCreateView(CreateView):

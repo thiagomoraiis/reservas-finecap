@@ -6,7 +6,7 @@ class Stands(models.Model):
     valor = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self) -> str:
-        return f'{self.localizacao} - R${self.valor}'
+        return f'{self.localizacao}'
 
 
 class Reserva(models.Model):

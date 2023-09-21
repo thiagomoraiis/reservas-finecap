@@ -7,12 +7,12 @@
     <div class="row">
 
       <h5 class="text-secondary">Filtrar</h5>
-      <form action="" method="get">
+      <form action="{% url 'index' %}" method="get">
         <div class="input-group">
-          <input type="search" name="search-name" aria-label="First name" class="form-control" value="">
-          <input type="checkbox" name="search-payed" aria-label="Last name" class="form-check-input mx-3" style="margin-top: 10px;">
-          <input type="search" name="search-value" aria-label="Last name" class="form-control me-3" value="">
-          <input type="date" name="search-date" aria-label="Last name" class="form-control" value="">
+          <input placeholder="Nome Empresa" type="text" name="search-name" class="form-control" value="">
+          <input placeholder="Quitado" type="checkbox" name="search-payed" class="form-check-input mx-3" style="margin-top: 10px;">
+          <input placeholder="Valor" type="text" name="search-value" class="form-control me-3" value="">
+          <input placeholder="Data" type="date" name="search-date" class="form-control" value="">
           <button type="submit" class="btn btn-primary ms-3">Enviar</button>
         </div>
 
@@ -23,6 +23,7 @@
             <thead class="bg-light">
               <tr>
                 <th class="text-secondary">Stand</th>
+                <th class="text-secondary">Valor</th>
                 <th class="text-secondary">Nome</th>
                 <th class="text-secondary">Quitado</th>
                 <th class="text-secondary">Data</th>
@@ -34,6 +35,9 @@
               <tr>
                 <td>
                   {{ i.stand }}
+                </td>
+                <td>
+                  {{ i.stand.valor }}
                 </td>
                 <td>
                   {{ i.nome_empresa }}
