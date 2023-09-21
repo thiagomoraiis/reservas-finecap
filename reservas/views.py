@@ -22,6 +22,7 @@ class IndexListView(ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
+        reservas = Reserva.objects.all()
 
         searched_name = self.request.GET.get('search-name')
         searched_value = self.request.GET.get('search-value')
@@ -29,18 +30,18 @@ class IndexListView(ListView):
         searched_date = self.request.GET.get('search-date')
 
         if searched_name:
-            qs = qs.filter(nome_empresa__icontains=searched_name)
+            reservas = reservas.filter(nome_empresa__icontains=searched_name)
 
-        elif searched_value:
-            qs = qs.filter(stand__valor=searched_value)
+        if searched_value:
+            reservas = reservas.filter(stand__valor=searched_value)
 
-        elif searched_payed is not None:
-            qs = qs.filter(quitado=bool(str(searched_payed)))
+        if searched_payed is not None:
+            reservas = reservas.filter(quitado=str(searched_payed))
 
-        elif searched_date:
-            qs = qs.filter(date__gte=searched_date)
+        if searched_date:
+            reservas = reservas.filter(date__gte=searched_date)
 
-        return qs
+        return reservas
 
 
 class ReservaCreateView(CreateView):
