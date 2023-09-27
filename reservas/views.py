@@ -17,31 +17,8 @@ from django.urls import reverse_lazy
 class IndexListView(ListView):
     model = Reserva
     template_name = 'reservas/pages/index.html'
-    queryset = Reserva.objects.all().order_by('date')
+    queryset = Reserva.objects.all()
     context_object_name = 'reservas'
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        reservas = Reserva.objects.all()
-
-        searched_name = self.request.GET.get('search-name')
-        searched_value = self.request.GET.get('search-value')
-        searched_payed = self.request.GET.get('search-payed')
-        searched_date = self.request.GET.get('search-date')
-
-        if searched_name:
-            reservas = reservas.filter(nome_empresa__icontains=searched_name)
-
-        if searched_value:
-            reservas = reservas.filter(stand__valor=searched_value)
-
-        if searched_payed is not None:
-            reservas = reservas.filter(quitado=str(searched_payed))
-
-        if searched_date:
-            reservas = reservas.filter(date__gte=searched_date)
-
-        return reservas
 
 
 class ReservaCreateView(CreateView):

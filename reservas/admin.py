@@ -12,5 +12,5 @@ class ReservaAdmin(admin.ModelAdmin):
     list_display = (
         'stand', 'nome_empresa',
         'categoria_empresa', 'cnpj',
-        'quitado', 'date'
+        'quitado'
     )
