@@ -12,7 +12,7 @@ from django.views.generic import (
 from .models import Reserva
 from .forms import ReservaModelForm
 from django.urls import reverse_lazy
-
+from django.core.paginator import Paginator
 
 class IndexListView(ListView):
     model = Reserva
@@ -41,7 +41,11 @@ class IndexListView(ListView):
         if searched_date:
             reservas = reservas.filter(date__gte=searched_date)
 
-        return reservas
+        paginator = Paginator(reservas, 2)
+        pagina = self.request.GET.get("pagina")
+        pag_obj = paginator.get_page(pagina)
+
+        return pag_obj
 
 
 class ReservaCreateView(CreateView):
