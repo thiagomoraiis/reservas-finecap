@@ -19,7 +19,7 @@ class IndexListView(ListView):
     template_name = 'reservas/pages/index.html'
     queryset = Reserva.objects.all().order_by('date')
     context_object_name = 'reservas'
-    paginate_by = 2
+    paginate_by = 5
 
     def get_queryset(self):
         reservas = super().get_queryset()
