@@ -19,6 +19,7 @@ class IndexListView(ListView):
     template_name = 'reservas/pages/index.html'
     queryset = Reserva.objects.all().order_by('date')
     context_object_name = 'reservas'
+    paginate_by = 2
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -41,11 +42,7 @@ class IndexListView(ListView):
         if searched_date:
             reservas = reservas.filter(date__gte=searched_date)
 
-        paginator = Paginator(reservas, 2)
-        pagina = self.request.GET.get("pagina")
-        pag_obj = paginator.get_page(pagina)
-
-        return pag_obj
+        return qs
 
 
 class ReservaCreateView(CreateView):
