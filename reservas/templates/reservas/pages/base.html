@@ -29,9 +29,12 @@
                     <li class="nav-item active">
                         <a class="nav-link text-white" aria-current="page" href="{% url 'index' %}">Home</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" aria-current="page" href="{% url 'create-reserva' %}">Criar Reserva</a>
+                    </li>
                     
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
+                        <li class="nav-item" style="display: flex; align-items: center;">
                             <span style="color: white;">
                                 {{ user.username }}
                             </span>
