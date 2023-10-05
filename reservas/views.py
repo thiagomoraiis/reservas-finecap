@@ -14,8 +14,6 @@ from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class IndexListView(LoginRequiredMixin, ListView):
-
-class IndexListView(ListView):
     model = Reserva
     template_name = 'reservas/pages/index.html'
     queryset = Reserva.objects.all()
@@ -45,7 +43,7 @@ class IndexListView(ListView):
         return reservas
 
 
-class ReservaCreateView(CreateView):
+class ReservaCreateView(LoginRequiredMixin, CreateView):
     model = Reserva
     form_class = ReservaModelForm
     template_name = 'reservas/pages/reserva_form.html'
