@@ -4,10 +4,13 @@
 
 {% block content %}
 <div class="container pt-3">
-    <form method="post">
-        {% csrf_token %}
-        {{ login_data.as_p }}
-        <input type="submit" value="Login">
-    </form>
+    <div class="row justify-content-center">
+        <form method="post" class="col-5">
+            <h1 class="text-secondary mb-3">Login</h1>
+            {% csrf_token %}
+            {% bootstrap_form login_data %}
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
