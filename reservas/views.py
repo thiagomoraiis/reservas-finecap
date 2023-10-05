@@ -10,17 +10,42 @@ from django.contrib.auth.decorators import login_required
 from .models import Reserva
 from .forms import ReservaModelForm
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# @login_required(login_url='/user/login')
 class IndexListView(LoginRequiredMixin, ListView):
+
+class IndexListView(ListView):
     model = Reserva
     template_name = 'reservas/pages/index.html'
     queryset = Reserva.objects.all()
     context_object_name = 'reservas'
     login_url = '/user/login/'
 
-class ReservaCreateView(LoginRequiredMixin, CreateView):
+    def get_queryset(self):
+        reservas = super().get_queryset()
+
+        searched_name = self.request.GET.get('search-name')
+        searched_value = self.request.GET.get('search-value')
+        searched_payed = self.request.GET.get('search-payed')
+        searched_date = self.request.GET.get('search-date')
+
+        if searched_name:
+            reservas = reservas.filter(nome_empresa__icontains=searched_name)
+
+        if searched_value:
+            reservas = reservas.filter(stand__valor=searched_value)
+
+        if searched_payed is not None:
+            reservas = reservas.filter(quitado=str(searched_payed))
+
+        if searched_date:
+            reservas = reservas.filter(date__gte=searched_date)
+
+        return reservas
+
+
+class ReservaCreateView(CreateView):
     model = Reserva
     form_class = ReservaModelForm
     template_name = 'reservas/pages/reserva_form.html'

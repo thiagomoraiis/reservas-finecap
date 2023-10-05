@@ -4,6 +4,23 @@
 {% block content %}
 <div class="container pt-3">
     <h1 class="text-secondary" >List de Reservas</h1>
+    <div class="row">
+
+      <h5 class="text-secondary">Filtrar</h5>
+      <form action="{% url 'index' %}" method="get">
+        <div class="input-group">
+          <input placeholder="Nome Empresa" type="text" name="search-name" class="form-control" value="">
+          <label for="search-payed-true" class="text-secondary" style="margin-top: 5px; margin-left: 10px;">Quitado</label>
+          <input id="search-payed-true" placeholder="Quitado" type="checkbox" name="search-payed" class="form-check-input mx-3" value="True" style="margin-top: 10px;">
+          <label for="search-payed-true" class="text-secondary" style="margin-top: 5px; margin-left: 10px;">Não quitado</label>
+          <input id="search-payed-false" placeholder="Quitado" type="checkbox" name="search-payed" class="form-check-input mx-3" value="False" style="margin-top: 10px;">
+          <input placeholder="Valor" type="text" name="search-value" class="form-control me-3" value="">
+          <input placeholder="Data" type="date" name="search-date" class="form-control" value="">
+          <button type="submit" class="btn btn-primary ms-3">Enviar</button>
+        </div>
+
+      </form>
+    </div>
     <div class="row mt-4">
         <table class="table align-middle mb-0 bg-white bt-4">
             <thead class="bg-light">
@@ -58,5 +75,23 @@
             </tbody>
           </table>
     </div>
+</div>
+
+<div class="container pt-3">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+      {% endif %}
+
+      {% for page in page_obj.paginator.page_range %}
+        <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+      {% endif %}
+    </ul>
+  </nav>
 </div>
 {% endblock content %}
